@@ -35,7 +35,7 @@ const Login = () => {
                 email: email,
                 password: password
             }).then(res => {
-                if (res.status === 404) {
+                if (res.status === 404 || res.status === 200 && res.data.length === 0) {
                     alert_message("Info!", 'You are not registered, please register yourself.', "info");
                 }
                 else if (res.status === 200) {
@@ -48,7 +48,11 @@ const Login = () => {
                     })
                     navigate("/");
                 }
-            })
+            }).catch(error => {
+                if (error.response.status === 404) {
+                    alert_message("Info!", 'You are not registered, please register yourself.', "info");
+                }
+            });
         }
         else {
             alert_message("Info!", 'Kindly fill all the details  to proceed further.', "info");

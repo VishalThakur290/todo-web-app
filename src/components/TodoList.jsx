@@ -21,7 +21,6 @@ const TodoList = () => {
     const store = useSelector((store) => store);
     const todoState = store.todo;
     const loaderState = store.loader;
-    console.log(store);
     const api = "https://todo-web-app-production.up.railway.app";
     const delete_todo_api = api + "/todos/delete/";
     const get_todo_api = api + '/todos/';

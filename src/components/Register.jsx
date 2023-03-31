@@ -40,7 +40,6 @@ const Register = () => {
                 email: email,
                 password: password
             }).then(res => {
-                console.log(res);
                 if (res.status === 201) {
                     setRegisterState({
                         name: '',
@@ -50,7 +49,11 @@ const Register = () => {
                     alert_message("Success!", `Hi ${registerState.name}, you're sucessfully registered. Please go ahead and login to your account!`, "success");
                     navigate("/login");
                 }
-            })
+            }).catch(error => {
+                if (error.response.status === 400) {
+                    alert_message("Error!", `Hi ${registerState.name}, email id: ${registerState.email} is already registered with us. Please try with different email to create account!`, "error");
+                }
+            });
         }
         else {
             alert_message("Info!", 'Kindly fill all the details to proceed further.', "info");
@@ -60,7 +63,7 @@ const Register = () => {
         title: title,
         text: text,
         icon: icon,
-        timer: 3000,
+        timer: 5000,
         button: {
             confirm: {
                 text: "OK",
