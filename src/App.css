@@ -1,0 +1,170 @@
+#root {
+  width: 1005;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.read-the-docs {
+  color: #888;
+  text-align: center;
+}
+
+.todo-list-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.todo-list-section input {
+  outline: none;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.todo-view-list-section {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.todo-view-list-section button {
+  margin: 0;
+  outline: none;
+  background-color: white;
+  color: red;
+  border: none;
+  width: 100%;
+}
+
+.todo-view-list-section button:hover {
+  border-color: red;
+}
+
+.todo-view-list-section button:focus,
+.todo-view-list-section button:focus-visible {
+  outline: 4px auto red;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  border: 1px solid black;
+  border-radius: 8px;
+  min-width: 70px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  border: 1px solid black;
+  border-radius: 8px;
+  min-width: 70px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: #fff;
+  width: 100%;
+}
+
+.card {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: #fff;
+  border-radius: 20px;
+  min-width: 200px;
+  -webkit-box-shadow: -1px 1px 33px 0px rgba(212, 197, 212, 1);
+  -moz-box-shadow: -1px 1px 33px 0px rgba(212, 197, 212, 1);
+  box-shadow: -1px 1px 33px 0px rgba(212, 197, 212, 1);
+  margin: 20px;
+}
+
+.card input {
+  outline: none;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.card button {
+  margin: 15px auto;
+  width: max-content;
+  padding: 10px 20px;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.breadcrumb {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.breadcrumb button {
+  margin: 0 15px;
+  padding: 10px 20px;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.todo-container {
+  width: 100%;
+  text-align: start;
+}
+
+.accordion__heading button {
+  float: right;
+  margin-right: 5%;
+}
+
+@media screen and (max-width: 600px) {
+  #root {
+    padding: 1.5rem;
+  }
+
+  .todo-list-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .todo-list-section input {
+    margin-bottom: 15px;
+  }
+
+  .breadcrumb {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .breadcrumb button {
+    margin: 10px 0;
+  }
+
+  .accordion__heading {
+    width: calc(100% - 35px);
+  }
+}
