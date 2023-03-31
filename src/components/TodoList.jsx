@@ -67,7 +67,6 @@ const TodoList = () => {
     const alert_message = (title, text, icon) => swal({
         title: title,
         text: text,
-        button: "Close",
         icon: icon,
         timer: 3000,
         button: {
