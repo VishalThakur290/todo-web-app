@@ -22,7 +22,7 @@ const AddTodo = () => {
             setVisible(true);
         }
     }, []);
-    const api = "https://todo-web-backend-production.up.railway.app";
+    const api = "https://todo-web-app-production.up.railway.app";
     const get_todo_api = api + '/todos/';
     const add_todo_api = api + '/todos/add';
     const [state, setState] = useState({

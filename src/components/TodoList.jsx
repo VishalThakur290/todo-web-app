@@ -17,7 +17,7 @@ const TodoList = () => {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const state = useSelector((store) => store.todo);
-    const api = "https://todo-web-backend-production.up.railway.app";
+    const api = "https://todo-web-app-production.up.railway.app";
     const delete_todo_api = api + "/todos/delete/";
     const get_todo_api = api + '/todos/';
     const deleteSingleTodo = (id) => {

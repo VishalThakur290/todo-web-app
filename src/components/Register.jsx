@@ -17,7 +17,7 @@ const Register = () => {
             setVisible(true);
         }
     }, []);
-    const api = "https://todo-web-backend-production.up.railway.app";
+    const api = "https://todo-web-app-production.up.railway.app";
     const register_api = api + "/users/add";
     const [registerState, setRegisterState] = useState({
         name: '',
