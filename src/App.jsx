@@ -1,5 +1,5 @@
 import Breadcrumb from './components/Breadcrumb'
-import Routings from './routing'
+import Routings from './Routing'
 
 function App() {
   return (
