@@ -11,12 +11,17 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import swal from 'sweetalert';
+import { deacticateLoader } from '../store/slices/loaderSlice'
+import Loader from './Loader'
 
 const TodoList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
-    const state = useSelector((store) => store.todo);
+    const store = useSelector((store) => store);
+    const todoState = store.todo;
+    const loaderState = store.loader;
+    console.log(store);
     const api = "https://todo-web-app-production.up.railway.app";
     const delete_todo_api = api + "/todos/delete/";
     const get_todo_api = api + '/todos/';
@@ -43,9 +48,10 @@ const TodoList = () => {
                 }
             });
     }
-    const getTodo = () => {
+    const getTodo = async () => {
+        await dispatch(deacticateLoader(true));
         const user = sessionStorage.getItem("user_id");
-        axios.post(get_todo_api, {
+        await axios.post(get_todo_api, {
             user_id: user
         }).then(res => {
             if (res.status === 200) {
@@ -53,6 +59,7 @@ const TodoList = () => {
                 dispatch(addTodo(data));
             }
         })
+        dispatch(deacticateLoader(false));
     }
     useEffect(() => {
         getTodo();
@@ -81,35 +88,41 @@ const TodoList = () => {
     });
     return (
         visible ? (
-            <div className='todo-container'>
-                {state.length !== 0 ? (
-                    <Accordion>
-                        {state.map((data, index) => {
-                            // const theObj = { __html: data.description };
-                            return (
-                                <AccordionItem key={index}>
-                                    <AccordionItemHeading>
-                                        <AccordionItemButton>
-                                            {data.title}
-                                            <button onClick={() => deleteSingleTodo(data._id)}><MdOutlineDelete /></button>
-                                        </AccordionItemButton>
-                                    </AccordionItemHeading>
-                                    <AccordionItemPanel>
-                                        {/* <div dangerouslySetInnerHTML={theObj} /> */}
-                                        <ReactQuill
-                                            value={data.description}
-                                            readOnly={true}
-                                            theme={"bubble"}
-                                        />
-                                    </AccordionItemPanel>
-                                </AccordionItem>
-                            )
-                        })}
-                    </Accordion>
+            <>
+                {loaderState ? (
+                    <Loader />
                 ) : (
-                    <h4 className='read-the-docs' style={{ marginTop: '50px' }}>No todo found!</h4>
+                    <div className='todo-container'>
+                        {todoState.length !== 0 ? (
+                            <Accordion>
+                                {todoState.map((data, index) => {
+                                    // const theObj = { __html: data.description };
+                                    return (
+                                        <AccordionItem key={index}>
+                                            <AccordionItemHeading>
+                                                <AccordionItemButton>
+                                                    {data.title}
+                                                    <button onClick={() => deleteSingleTodo(data._id)}><MdOutlineDelete /></button>
+                                                </AccordionItemButton>
+                                            </AccordionItemHeading>
+                                            <AccordionItemPanel>
+                                                {/* <div dangerouslySetInnerHTML={theObj} /> */}
+                                                <ReactQuill
+                                                    value={data.description}
+                                                    readOnly={true}
+                                                    theme={"bubble"}
+                                                />
+                                            </AccordionItemPanel>
+                                        </AccordionItem>
+                                    )
+                                })}
+                            </Accordion>
+                        ) : (
+                            <h4 className='read-the-docs' style={{ marginTop: '50px' }}>No todo found!</h4>
+                        )}
+                    </div>
                 )}
-            </div>
+            </>
         ) : false
     )
 }

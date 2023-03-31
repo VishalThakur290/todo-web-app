@@ -35,7 +35,6 @@ const Login = () => {
                 email: email,
                 password: password
             }).then(res => {
-                console.log(res);
                 if (res.status === 404) {
                     alert_message("Info!", 'You are not registered, please register yourself.', "info");
                 }
