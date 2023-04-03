@@ -25,10 +25,15 @@ const Register = () => {
         password: ''
     })
     const handleInput = (e) => {
-        setRegisterState({ ...registerState, [e.target.name]: e.target.value })
-    }
-    const handleLoginInput = (e) => {
-        setLoginState({ ...loginState, [e.target.name]: e.target.value })
+        if (e.target.name === "email") {
+            const email = e.target.value;
+            const email_without_space = email.replaceAll(" ", "");
+            const lowercase_email = email_without_space.toLocaleLowerCase();
+            setRegisterState({ ...registerState, email: lowercase_email })
+        }
+        else {
+            setRegisterState({ ...registerState, [e.target.name]: e.target.value })
+        }
     }
     const register = () => {
         const name = registerState.name;
@@ -51,7 +56,7 @@ const Register = () => {
                 }
             }).catch(error => {
                 if (error.response.status === 400) {
-                    alert_message("Error!", `Hi ${registerState.name}, email id: ${registerState.email} is already registered with us. Please try with different email to create account!`, "error");
+                    alert_message("Error!", `Hi ${registerState.name}, email id or username: ${registerState.email} is already registered with us. Please try with different email to create account!`, "error");
                 }
             });
         }
@@ -80,7 +85,7 @@ const Register = () => {
                 <div className="card">
                     <h2>Register yourself!</h2>
                     <input type="text" placeholder='Enter name' value={registerState.name} onChange={(e) => handleInput(e)} name="name" id="name" />
-                    <input type="email" placeholder='Enter email' value={registerState.email} onChange={(e) => handleInput(e)} name="email" id="email" />
+                    <input type="text" placeholder='Enter email or username' value={registerState.email} onChange={(e) => handleInput(e)} name="email" id="email" />
                     <input type="password" placeholder='Enter password' value={registerState.password} onChange={(e) => handleInput(e)} name="password" id="password" />
                     <button onClick={register}>Register</button>
                     <a>Already have an account? <NavLink to='/login'>Login here</NavLink></a>

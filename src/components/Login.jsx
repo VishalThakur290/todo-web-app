@@ -24,7 +24,15 @@ const Login = () => {
         password: ''
     })
     const handleLoginInput = (e) => {
-        setLoginState({ ...loginState, [e.target.name]: e.target.value })
+        if (e.target.name === "email") {
+            const email = e.target.value;
+            const email_without_space = email.replaceAll(" ", "");
+            const lowercase_email = email_without_space.toLocaleLowerCase();
+            setLoginState({ ...loginState, email: lowercase_email })
+        }
+        else {
+            setLoginState({ ...loginState, [e.target.name]: e.target.value })
+        }        
     }
 
     const loginUser = () => {
@@ -78,7 +86,7 @@ const Login = () => {
             {visible ? (
                 <div className="card">
                     <h2>Login to your account!</h2>
-                    <input type="text" placeholder='Enter email' value={loginState.email} onChange={(e) => handleLoginInput(e)} name="email" id="email" />
+                    <input type="text" placeholder='Enter email or username' value={loginState.email} onChange={(e) => handleLoginInput(e)} name="email" id="email" />
                     <input type="password" placeholder='Enter password' value={loginState.password} onChange={(e) => handleLoginInput(e)} name="password" id="password" />
                     <button onClick={loginUser}>Login</button>
                     <a>Don't have an account? <NavLink to='/register'>Register here</NavLink></a>

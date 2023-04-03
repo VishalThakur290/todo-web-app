@@ -12,7 +12,11 @@ const Breadcrumb = () => {
     const user = sessionStorage.getItem("user_id");
     return (
         <div className='breadcrumb'>
-            <h3>Todo - Your personal Todos</h3>
+            {sessionStorage.getItem("user_id") === null ? (
+                <h3>Todo - Your personal Todos</h3>
+            ) : (
+                <h3>Todo - {sessionStorage.getItem("user_name")}'s personal Todos</h3>
+            )}
             {current_page === "/view-todo" && user !== null ? <NavLink to="/"><button>Add Todo</button></NavLink> : false}
             {current_page === "/" && user !== null ? <NavLink to="/view-todo"><button>View Todos</button></NavLink> : false}
             {sessionStorage.getItem("user_id") !== null ? (<button onClick={logout}>Log Out</button>) : false}
